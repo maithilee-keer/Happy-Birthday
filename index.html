@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday 🎉</title>
+    <style>
+        body {
+            background-color: #333;
+        }
+
+        /* Cake container */
+        .cake {
+            position: absolute;
+            width: 250px;
+            height: 200px;
+            top: 50%;
+            left: 50%;
+            margin-top: -70px;
+            margin-left: -125px;
+        }
+
+        .cake>* {
+            position: absolute;
+        }
+
+        /* Plate */
+        .plate {
+            width: 270px;
+            height: 110px;
+            position: absolute;
+            bottom: -10px;
+            left: -10px;
+            background-color: #ccc;
+            border-radius: 50%;
+            box-shadow:
+                0 2px 0 #b3b3b3,
+                0 4px 0 #b3b3b3,
+                0 5px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Cake layers */
+        .layer {
+            width: 250px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #553c13;
+            box-shadow:
+                0 2px 0 #5f4316,
+                0 4px 0 #4d350f,
+                0 6px 0 #4b340f,
+                0 8px 0 #4a330f,
+                0 10px 0 #49320e,
+                0 12px 0 #48310e,
+                0 14px 0 #47300e,
+                0 16px 0 #462f0d,
+                0 18px 0 #452e0d,
+                0 20px 0 #442d0d,
+                0 22px 0 #432c0c,
+                0 24px 0 #422b0c,
+                0 26px 0 #412a0c,
+                0 28px 0 #40290b,
+                0 30px 0 #3f280b;
+        }
+
+        .layer-top {
+            top: 0;
+        }
+
+        .layer-middle {
+            top: 33px;
+        }
+
+        .layer-bottom {
+            top: 66px;
+        }
+
+        /* Icing */
+        .icing {
+            top: 2px;
+            left: 5px;
+            width: 240px;
+            height: 90px;
+            border-radius: 50%;
+            background-color: #f0e4d0;
+        }
+
+        .icing::before {
+            content: "";
+            position: absolute;
+            top: 4px;
+            right: 5px;
+            bottom: 6px;
+            left: 5px;
+            background-color: #f3e8d6;
+            box-shadow:
+                0 0 4px #f7edde,
+                0 0 4px #f7edde,
+                0 0 4px #f7edde;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        /* Drips */
+        .drip {
+            width: 50px;
+            height: 60px;
+            background-color: #f0e4d0;
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+        }
+
+        .drip1 {
+            top: 53px;
+            left: 5px;
+            width: 40px;
+            height: 48px;
+            transform: skewY(15deg);
+        }
+
+        .drip2 {
+            top: 69px;
+            left: 181px;
+            transform: skewY(-15deg);
+        }
+
+        .drip3 {
+            top: 54px;
+            left: 90px;
+            width: 80px;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+        }
+
+        /* Candle */
+        .candle {
+            background-color: #7b020b;
+            width: 16px;
+            height: 50px;
+            border-radius: 8px / 4px;
+            top: -20px;
+            left: 50%;
+            margin-left: -8px;
+            z-index: 10;
+        }
+
+        .candle::before {
+            content: "";
+            position: absolute;
+            width: 16px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #9a1a22;
+        }
+
+        /* Flame */
+        .flame {
+            position: absolute;
+            width: 15px;
+            height: 35px;
+            top: -34px;
+            left: 50%;
+            margin-left: -7.5px;
+            background-color: orange;
+            border-radius: 10px 10px 10px 10px / 25px 25px 10px 10px;
+            z-index: 10;
+            transform-origin: 50% 90%;
+            animation: flicker 1s ease-in-out infinite alternate;
+            box-shadow:
+                0 0 10px rgba(255, 165, 0, 0.5),
+                0 0 20px rgba(255, 165, 0, 0.5),
+                0 0 60px rgba(255, 165, 0, 0.5),
+                0 0 80px rgba(255, 165, 0, 0.5);
+        }
+
+        .flame.off {
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.5s ease-out;
+            box-shadow: none;
+        }
+
+
+        /* Animation */
+        @keyframes flicker {
+            0% {
+                transform: skewX(5deg);
+                box-shadow:
+                    0 0 10px rgba(255, 165, 0, 0.2),
+                    0 0 20px rgba(255, 165, 0, 0.2),
+                    0 0 60px rgba(255, 165, 0, 0.2),
+                    0 0 80px rgba(255, 165, 0, 0.2);
+            }
+
+            25% {
+                transform: skewX(-5deg);
+            }
+
+            50% {
+                transform: skewX(10deg);
+            }
+
+            75% {
+                transform: skewX(-10deg);
+            }
+
+            100% {
+                transform: skewX(5deg);
+            }
+        }
+
+        /* Smoke */
+        .smoke {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background: rgba(200, 200, 200, 0.6);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            animation: smoke 2s ease-out forwards;
+            filter: blur(2px);
+        }
+
+        .smoke::before,
+        .smoke::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(200, 200, 200, 0.5);
+            border-radius: 50%;
+        }
+
+        .smoke::before {
+            left: -10px;
+            top: 5px;
+        }
+
+        .smoke::after {
+            left: 10px;
+            top: 10px;
+        }
+
+        @keyframes smoke {
+            0% {
+                opacity: 0.8;
+                transform: translate(-50%, 0) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -60px) scale(2);
+            }
+        }
+
+        /* Intro Image Screen */
+        .intro {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle, #ffffff, #faf7f7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            overflow: hidden;
+        }
+
+        .intro-img {
+            max-width: 80%;
+            animation: zoomIn 1.5s ease-out forwards;
+        }
+
+        /* Cake hidden initially */
+        .cake {
+            opacity: 0;
+            transform: scale(0.6);
+            transition: all 1s ease;
+        }
+
+        .cake.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Confetti */
+        .confetti {
+            position: absolute;
+            top: -10px;
+            width: 10px;
+            height: 10px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.7);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Cake hidden initially */
+        .cake {
+            opacity: 0;
+            transform: scale(0.6);
+            transition: all 1s ease;
+        }
+
+        .cake.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Instruction text */
+        .hint {
+            position: absolute;
+            top: -110px;
+            width: 100%;
+            text-align: center;
+            font-size: 1.2rem;
+            color: #ffd700;
+            font-family: 'Safira March', cursive;
+            letter-spacing: 1px;
+            animation: pulse 1.5s infinite;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+            pointer-events: none;
+        }
+
+
+        /* -------- Gift Screen -------- */
+        .gift-screen {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: 1s;
+            z-index: 200;
+        }
+
+        .gift-screen.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .gift-center {
+            position: relative;
+            width: 220px;
+            margin-top: -150px;
+        }
+
+        .box {
+            width: 100%;
+            z-index: 1;
+            cursor: pointer;
+        }
+
+        .lid {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            cursor: pointer;
+            transition: transform 1s ease;
+        }
+
+        .lid.open {
+            transform: translateY(220px);
+        }
+
+        /* -------- Scenes -------- */
+        .scene {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 300;
+        }
+
+        .scene.active {
+            display: flex;
+        }
+
+        .slideshow {
+    position: relative;
+    width: 300px; /* small size like polaroid */
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+ 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    
+    flex-shrink: 0;
+}
+
+.slideshow img {
+    max-width: 100%;
+    max-height: 100%;
+    display: none;
+    transition: transform 0.3s ease;
+        
+}
+
+.slideshow img.active {
+    display: block;
+}
+
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: #333;
+    background: rgba(255,255,255,0.7);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    z-index: 10;
+}
+
+.nav-prev {
+    left: 0px;
+}
+
+.nav-next {
+    right: 0px;
+}
+
+     
+
+        .letter-content {
+            position: relative;
+            width: 90%;
+            height: 90%;
+            text-align: center;
+            color: #fff;
+        }
+
+        .full-letter {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .back-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border: none;
+            border-radius: 6px;
+            background: #be4762;
+            color: #ffffff;
+            bottom: 25px;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Intro -->
+    <div class="intro">
+        <img src="bday.png" class="intro-img">
+        <div class="confetti-container"></div>
+    </div>
+
+    <!-- Cake -->
+    <div class="cake">
+        <div class="hint">Blow the candle 🎂</div>
+        <div class="plate"></div>
+        <div class="layer layer-bottom"></div>
+        <div class="layer layer-middle"></div>
+        <div class="layer layer-top"></div>
+        <div class="icing"></div>
+        <div class="drip drip1"></div>
+        <div class="drip drip2"></div>
+        <div class="drip drip3"></div>
+        <div class="candle">
+            <div class="flame"></div>
+        </div>
+    </div>
+
+    <!-- Gift Screen -->
+    <div class="gift-screen">
+        <div class="gift-center">
+            <img src="lid.png" class="lid">
+            <img src="box.png" usemap="#image-map" class="box" style="width:220px;">
+            <map name="image-map">
+                <area alt="Book" title="Book" coords="0,0,110,110" shape="rect">
+                <area alt="Camera" title="Camera" coords="110,0,220,110" shape="rect">
+                <area alt="Letter" title="Letter" coords="0,110,220,220" shape="rect">
+            </map>
+        </div>
+    </div>
+
+    <!-- Scenes -->
+    <div class="scene book-scene">
+        <div class="slideshow" style="width: 100%;height: 100%;">
+            <img src="img1.png">
+            <img src="img2.png">
+            <img src="img3.png">
+            <img src="img4.png">
+            <img src="img5.png">
+            <img src="img6.png">
+            <img src="img7.png">
+        </div>
+        <button class="back-btn">Back</button>
+    </div>
+
+    <div class="scene camera-scene">
+        <div class="slideshow">
+            <span class="nav-btn nav-prev">&#10094;</span>
+            <img src="1.png">
+            <img src="2.png">
+             <img src="3.png">
+              <img src="4.png">
+               <img src="5.png">
+               <img src="6.png">
+               <img src="7.png">
+             <span class="nav-btn nav-next">&#10095;</span>
+        </div>
+        <button class="back-btn">Back</button>
+    </div>
+
+    <div class="scene letter-scene">
+        <div class="letter-content">
+            <img src="letter-bg.png" class="full-letter">
+            
+        </div>
+        <button class="back-btn">Back</button>
+    </div>
+
+    <script>
+        // -------- Intro Confetti --------
+        const confettiContainer = document.querySelector('.confetti-container');
+        for (let i = 0; i < 80; i++) {
+            const c = document.createElement('div'); c.className = 'confetti';
+            c.style.left = Math.random() * 100 + 'vw';
+            c.style.backgroundColor = `hsl(${Math.random() * 360},100%,50%)`;
+            c.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            confettiContainer.appendChild(c);
+        }
+
+        // -------- Cake Logic --------
+        const cake = document.querySelector('.cake');
+        const flame = document.querySelector('.flame');
+        const giftScreen = document.querySelector('.gift-screen');
+        const lid = document.querySelector('.lid');
+        let blownOut = false, lidOpened = false;
+
+        function blowOut() {
+            if (blownOut) return;
+            blownOut = true;
+            flame.classList.add('off');
+            const smoke = document.createElement('div'); smoke.className = 'smoke';
+            document.querySelector('.candle').appendChild(smoke);
+            setTimeout(() => smoke.remove(), 2000);
+            setTimeout(() => {
+                cake.style.display = 'none';
+                giftScreen.classList.add('show');
+            }, 1200);
+        }
+        cake.addEventListener('click', blowOut);
+
+        // -------- Lid Click --------
+        lid.addEventListener('click', e => {
+            e.stopPropagation();
+            if (!lidOpened) { lid.classList.add('open'); lidOpened = true; }
+        });
+
+        // -------- Scenes --------
+        const bookArea = document.querySelector('area[alt="Book"]');
+        const cameraArea = document.querySelector('area[alt="Camera"]');
+        const letterArea = document.querySelector('area[alt="Letter"]');
+        const bookScene = document.querySelector('.book-scene');
+        const cameraScene = document.querySelector('.camera-scene');
+        const letterScene = document.querySelector('.letter-scene');
+        const scenes = [bookScene, cameraScene, letterScene];
+
+        function hideScenes() { scenes.forEach(s => s.classList.remove('active')); }
+        // Slideshow helper (updated)
+       function startSlideshow(scene){
+    const slides = scene.querySelectorAll('.slideshow img');
+    const backBtn = scene.querySelector('.back-btn');
+    const prevBtn = scene.querySelector('.nav-prev');
+    const nextBtn = scene.querySelector('.nav-next');
+    const slideshow = scene.querySelector('.slideshow');
+
+    let index = 0;
+
+    slides.forEach(img => img.classList.remove('active'));
+    backBtn.style.display = 'none';
+    slides[0].classList.add('active');
+
+    function updateSlide(){
+        slides.forEach(img => img.classList.remove('active'));
+        slides[index].classList.add('active');
+
+        // Back button ONLY on last slide
+        backBtn.style.display =
+            (index === slides.length - 1) ? 'block' : 'none';
+    }
+
+    // CAMERA → arrows
+    if(nextBtn){
+        nextBtn.onclick = e => {
+            e.stopPropagation();
+            if(index < slides.length - 1){
+                index++;
+                updateSlide();
+            }
+        };
+    }
+
+    if(prevBtn){
+        prevBtn.onclick = e => {
+            e.stopPropagation();
+            if(index > 0){
+                index--;
+                updateSlide();
+            }
+        };
+    }
+
+    // BOOK → tap anywhere to go next
+    slideshow.onclick = () => {
+        if(index < slides.length - 1){
+            index++;
+            updateSlide();
+        }
+    };
+}
+
+        // Back buttons
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                hideScenes();
+                giftScreen.classList.add('show');
+                lidOpened = true;
+            });
+        });
+
+        // Image map clicks
+        bookArea.addEventListener('click', e => {
+            e.preventDefault();
+            giftScreen.classList.remove('show');
+            bookScene.classList.add('active');
+            startSlideshow(bookScene);
+        });
+        cameraArea.addEventListener('click', e => {
+            e.preventDefault();
+            giftScreen.classList.remove('show');
+            cameraScene.classList.add('active');
+            startSlideshow(cameraScene);
+        });
+        letterArea.addEventListener('click', e => {
+            e.preventDefault();
+            giftScreen.classList.remove('show');
+            letterScene.classList.add('active');
+        });
+
+        // -------- Show cake after intro --------
+        setTimeout(() => {
+            document.querySelector('.intro').style.display = 'none';
+            cake.classList.add('show');
+        }, 3500);
+    </script>
+
+</body>
+
+</html>
